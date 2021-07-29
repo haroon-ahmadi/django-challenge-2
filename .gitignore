@@ -1,0 +1,14 @@
+*.pyc
+*~
+/.vscode
+__pycache__
+.idea
+myvenv
+venv
+.env
+.venv
+.env.development
+.DS_Store
+media
+static
+node_modules

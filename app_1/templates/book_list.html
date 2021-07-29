@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Book List</title>
+</head>
+
+
+<body>
+{% if author_name %}
+    Books by {{ author_name }}
+    <br/>
+    <br/>
+{% endif %}
+{% for book in books %}
+    {{ book }}
+    {% if not author_name %}
+        - <a href="{% url 'book_list' %}?author_name={{ book.author.name }}">{{ book.author.name }}</a>
+    {% endif %}
+    - <a href="https://google.com">But now for {{ book.price }}$</a>
+    <br/>
+{% endfor %}
+</body>
