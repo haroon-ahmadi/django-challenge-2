@@ -1,0 +1,35 @@
+from django.contrib import admin
+
+from app_1.models import Author, Book 
+from django.utils.safestring import mark_safe
+
+from django.utils.html import format_html
+
+class AnswerTabuline(admin.TabularInline):
+    model=Book
+
+class AuthorAdmin(admin.ModelAdmin):
+    inlines=[AnswerTabuline]
+    list_display = ('name', 'modified_at', 'created_at','show_firm_url')
+    readonly_fields = ()
+    def show_firm_url(self, obj):
+        return format_html(f"<a href= '/book/list?author_name={ obj.name }'>Articels</a>", url=obj.name)
+
+    show_firm_url.short_description = "Firm URL"
+    
+        
+
+admin.site.register(Author, AuthorAdmin)
+
+
+
+
+class BookAdmin(admin.ModelAdmin):
+
+
+    list_display = ('name', 'modified_at', 'created_at')
+    readonly_fields = ()
+
+
+
+admin.site.register(Book, BookAdmin)
